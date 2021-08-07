@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native'
 export default StyleSheet.create({
     container: {
       flex: 1,
-      backgroundColor: '#1F1D2B',
+      backgroundColor: '#C4DBE0',
       paddingHorizontal: 7,
 
     },
@@ -14,7 +14,7 @@ export default StyleSheet.create({
       fontSize: 30,
     },
     TextName: {
-      color: '#2a97d1'
+      color: '#2EB5E0'
     },
     text: {
       textAlign: 'left',
