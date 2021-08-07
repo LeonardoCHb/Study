@@ -1,22 +1,20 @@
-import React from 'react';
-import { SearchBar } from '../SearchBar/SearchBar.js';
+import React from "react";
 
+import { StatusBar } from "expo-status-bar";
+import { Text, View } from "react-native";
 
-import { StatusBar } from 'expo-status-bar';
-import { Text, View } from 'react-native';
-
-
-import styles from "./HomeScreen.styles.js"
-
+import styles from "./HomeScreen.styles.js";
+import { SearchField } from "../SearchField /SearchField.js";
+import { TaskCard } from "../TaskCard/TaskCard.js";
 
 export function HomeScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.HeaderText}>Hello Leopardo!</Text>
       <Text style={styles.text}>What are we going to learn today?</Text>
-      <SearchBar />
+      <SearchField />
+      <TaskCard />
       <StatusBar translucent backgroundColor="transparent" />
     </View>
   );
 }
-

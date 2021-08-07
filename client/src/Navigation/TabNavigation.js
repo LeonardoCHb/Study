@@ -27,8 +27,8 @@ export function TabNavigation() {
             },
             tabBarActiveTintColor: '#D3D3D3',
             tabBarInactiveTintColor: '#A9A9A9',
-            tabBarActiveBackgroundColor: '#000000',
-            tabBarInactiveBackgroundColor: '#000000',
+            tabBarActiveBackgroundColor: '#1F1D2B',
+            tabBarInactiveBackgroundColor: '#1F1D2B',
             })}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
