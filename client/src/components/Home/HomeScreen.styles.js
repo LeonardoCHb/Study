@@ -11,10 +11,13 @@ export default StyleSheet.create({
       color: '#FFFFFF',
       fontSize: 30,
     },
+    TextName: {
+      color: '#2a97d1'
+    },
     text: {
       textAlign: 'left',
       color: '#FFFFFF',
       fontSize: 20,
-      marginBottom: 10
+      marginBottom: 15,
     }
 });

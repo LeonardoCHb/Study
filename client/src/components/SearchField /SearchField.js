@@ -8,6 +8,7 @@ const theme = {
       backgroundColor: "#252836",
       borderWidth: 1,
       borderRadius: 15,
+      marginBottom: 15,
     },
     inputStyle: {
       padding: 3,
