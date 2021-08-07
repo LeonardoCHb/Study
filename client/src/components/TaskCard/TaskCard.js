@@ -1,44 +1,25 @@
-import React, { useState, useEffect } from "react";
+import * as React from "react";
+import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 
-import { View, Text, Image } from "react-native";
-
-import { Card, ListItem, Button, Icon, ThemeProvider } from "react-native-elements";
-
-const theme = {
-    Card: {
-      containerStyle: {
-        padding: 3,
-        width: "auto",
-        backgroundColor: "#252836",
-        borderWidth: 1,
-        borderRadius: 15,
-      },
-      wrapperStyle: {
-          padding: 20,
-      },
-      inputStyle: {
-        padding: 3,
-        color: "#FFFFFF",
-        backgroundColor: "#252836",
-      },
-      inputContainerStyle: {
-        backgroundColor: "#252836",
-      },
-    },
-  };
+const TaskCardStyle = {
+  padding: 3,
+  marginBottom: 20,
+  borderRadius: 10,
+};
+const subtitleStyle = {
+  color: "#1FDDDD",
+};
 
 export function TaskCard() {
   return (
-    <ThemeProvider theme={theme}>
-        <Card>
-          <Card.Title>Task Name</Card.Title>
-          <Card.Divider />
-          <Card.Image>
-            <Text>
-              
-            </Text>
-          </Card.Image>
-        </Card>
-    </ThemeProvider>
+    <Card style={TaskCardStyle}>
+        <Card.Title
+          title="Trigonometry Test"
+          subtitle="Math - 01/01"
+          subtitleStyle={subtitleStyle}
+          left={(props) => <Avatar.Icon {...props} icon="home" />}
+        />
+        
+    </Card>
   );
 }
