@@ -3,7 +3,7 @@ import { Searchbar } from 'react-native-paper';
 
 const SearchBarStyle = {
     padding: 1,
-    marginInline:30,
+    marginInline: 30,
     marginBottom: 40,
     borderRadius: 10,
 };
