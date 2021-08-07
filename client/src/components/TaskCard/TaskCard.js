@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { Avatar, Card } from "react-native-paper";
 
 const TaskCardStyle = {
   padding: 3,

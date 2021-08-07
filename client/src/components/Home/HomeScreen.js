@@ -1,6 +1,5 @@
 import React from "react";
 
-import { StatusBar } from "expo-status-bar";
 import { ScrollView, Text, View } from "react-native";
 
 import styles from "./HomeScreen.styles.js";
@@ -21,7 +20,6 @@ export function HomeScreen() {
         <TaskCard/>
         <TaskCard/>
         <TaskCard/>
-      <StatusBar translucent backgroundColor="transparent" />
       </ScrollView>
     </View>
   );

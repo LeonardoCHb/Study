@@ -1,9 +1,11 @@
 import React, { useState,  } from "react";
-import { Provider as PaperProvider, Searchbar, Chip } from 'react-native-paper';
+import { Searchbar } from 'react-native-paper';
 
 const SearchBarStyle = {
     padding: 1,
+    marginInline:30,
     marginBottom: 40,
+    borderRadius: 10,
 };
 
 export function SearchField() {

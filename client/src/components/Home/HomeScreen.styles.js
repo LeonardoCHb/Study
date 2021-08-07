@@ -4,9 +4,10 @@ export default StyleSheet.create({
     container: {
       flex: 1,
       backgroundColor: '#1F1D2B',
-      padding: 30,
+      padding: 10,
     },
     HeaderText: {
+      marginTop:30,
       textAlign: 'auto',
       color: '#FFFFFF',
       fontSize: 30,
