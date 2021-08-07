@@ -12,23 +12,30 @@ export default function ReduxTest(){
     const user = useSelector((state) => state.user)
     const subjects = useSelector((state) => state.subjects)
     const subjectExample =   {
-      id: Date.now(),
-      name: 'Matematica',
+      id: 123,
+      name: 'Math',
       grade:[
         {
-          day: 'Segunda',
+          day: 'Monday',
           time: [0, 1, 2]
         }
       ],
       tasks: [
         { 
           id: Date.now(),
-          name: 'Prova de matematica',
-          task: 'Prova de sobre logaritmo',
+          name: 'math test',
+          task: 'test about logarithm',
           limitDate: '15/08/2021',
         }
       ]
     }
+    const newTask =  { 
+      id: Date.now(),
+      name: 'task',
+      task: 'task about exponentiation',
+      limitDate: '15/08/2021',
+    }
+
 
     const clearName = () => {
       dispatch(userClearName())
@@ -39,12 +46,24 @@ export default function ReduxTest(){
       setName('')
     }
 
+    const addSubject = () => {
+      dispatch(subjectsAddSubject(subjectExample))
+    }
+    const removeSubject = () => {
+      dispatch(subjectsRemoveSubject(subjectExample.id))
+    }
+    const updateSubject = () => {
+      const updatedSubject = JSON.parse(JSON.stringify(subjectExample))
+      updatedSubject.tasks.push(newTask)
+      dispatch(subjectsUpdateSubject(updatedSubject))
+    }
+
     console.log(subjectExample)
     console.log(subjects)
     console.log(user)
 
     return (
-      <div>Meu nome é:{' '}
+      <div>My name is:{' '}
         {user.name ? user.name : (
         <textarea 
         id='name' 
@@ -52,8 +71,11 @@ export default function ReduxTest(){
         onChange={(e)=>setName(e.target.value)}
         />)}
         <br/>
-        <button onClick={saveName}>Salvar nome</button>
-        <button onClick={clearName}>Limpar nome</button>
+        <button onClick={saveName}>Save name</button>
+        <button onClick={clearName}>Clear name</button>
+        <button onClick={addSubject}>Add subject</button>
+        <button onClick={removeSubject}>Remove subject</button>
+        <button onClick={updateSubject}>Update subject</button>
       </div>
       )
 }

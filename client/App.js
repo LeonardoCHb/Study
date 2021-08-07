@@ -6,7 +6,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import {store, persistor} from './src/redux/store'
 
-import ReduxTest from './src/components/ReduxTest';
+import ReduxTest from './src/components/Example';
 
 export default function App() {
   return (

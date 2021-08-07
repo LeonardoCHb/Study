@@ -16,8 +16,8 @@ const subjects = (state = initialSubjects, action) => {
     }
     case SUBJECTS_UPDATE_SUBJECT: {
       const subjectsList = state
-      const pos = subjectsList.findIndex((subject) => subject.id === payload.id)
-      if (pos !== -1) subjectsList[pos] = payload
+      const pos = subjectsList.findIndex((subject) => subject.id === action.payload.id)
+      if (pos !== -1) subjectsList[pos] = action.payload
       return [...subjectsList]
     }
     default:
