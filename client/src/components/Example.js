@@ -1,4 +1,5 @@
 import React from 'react'
+import { SafeAreaView, StyleSheet, TextInput, Button, Text } from "react-native";
 import { useDispatch, useSelector } from 'react-redux'
 import { userSetName, userClearName } from '../redux/actions/user'
 import { subjectsAddSubject, 
@@ -63,19 +64,18 @@ export default function ReduxTest(){
     console.log(user)
 
     return (
-      <div>My name is:{' '}
-        {user.name ? user.name : (
-        <textarea 
-        id='name' 
-        value={name} 
-        onChange={(e)=>setName(e.target.value)}
+      <SafeAreaView>
+        <Text>My name is:{' '}</Text>
+        {user.name ? <Text>{user.name}</Text> : (
+        <TextInput  
+          value={name} 
+          onChangeText={setName}
         />)}
-        <br/>
-        <button onClick={saveName}>Save name</button>
-        <button onClick={clearName}>Clear name</button>
-        <button onClick={addSubject}>Add subject</button>
-        <button onClick={removeSubject}>Remove subject</button>
-        <button onClick={updateSubject}>Update subject</button>
-      </div>
+        <Button onPress={saveName} title='Save name' />
+        <Button onPress={clearName} title='Clear name' />
+        <Button onPress={addSubject} title='Add subject' />
+        <Button onPress={removeSubject} title='Remove subject' />
+        <Button onPress={updateSubject} title='Update subject' />
+      </SafeAreaView>
       )
 }
