@@ -16,7 +16,7 @@ const subjects = (state = initialSubjects, action) => {
       return [...state, action.payload];
     }
     case SUBJECTS_UPDATE_SUBJECT: {
-      const subjectsList = state
+      const subjectsList = JSON.parse(JSON.stringify(state))
       const pos = subjectsList.findIndex((subject) => subject.id === action.payload.id)
       if (pos !== -1) subjectsList[pos] = action.payload
       return [...subjectsList]

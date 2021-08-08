@@ -2,10 +2,9 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: '#C4DBE0',
       paddingHorizontal: 7,
-
+      height: '100%'
     },
     HeaderText: {
       marginTop:30,
@@ -24,8 +23,11 @@ export default StyleSheet.create({
     },
     fab: {
       position: 'absolute',
-      margin: 16,
-      right: 0,
-      bottom: 0,
+      right: 10,
+      bottom: 10,
+    },
+    scroll: {
+      backgroundColor: 'gray',
+      borderRadius: 15
     },
 });

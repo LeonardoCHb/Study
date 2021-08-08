@@ -11,51 +11,48 @@ import { useIsFocused } from "@react-navigation/native";
 const Tab = createMaterialBottomTabNavigator();
 
 export function TabNavigation() {
+
+
   return (
-    <Tab.Navigator
-      initialRouteName="Home"
-      activeColor="#fff"
-      inactiveColor="#000"
-      barStyle={{ backgroundColor: "#1E90FF" }}
-      defaultScreenOptions
-      shifting={true}
-    >
-      <Tab.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{
-          tabBarLabel: "Home",
-          tabBarAccessibilityLabel: "Home",
-          tabBarIcon: ({ focused, color }) =>
-            focused ? (
+    <>
+      <Tab.Navigator
+        initialRouteName="Home"
+        activeColor="#fff"
+        inactiveColor="#000"
+        barStyle={{ backgroundColor: "#1E90FF" }}
+        defaultScreenOptions
+        shifting={true}
+      >
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarLabel: "Home",
+            tabBarAccessibilityLabel: "Home",
+            tabBarIcon: ({ focused, color }) => focused ? (
               <MaterialCommunityIcons name="home" size={26} color={color} />
             ) : (
               <MaterialCommunityIcons
                 name="home-outline"
                 size={26}
-                color={color}
-              />
+                color={color} />
             ),
-        }}
-      />
-      <Tab.Screen
-        name="Schedule"
-        component={ClassScheduleScreen}
-        options={{
-          tabBarLabel: "Schedule",
-          tabBarIcon: ({ focused, color }) =>
-            focused ? (
+          }} />
+        <Tab.Screen
+          name="Schedule"
+          component={ClassScheduleScreen}
+          options={{
+            tabBarLabel: "Schedule",
+            tabBarIcon: ({ focused, color }) => focused ? (
               <MaterialCommunityIcons
                 name="calendar-heart"
                 size={26}
-                color={color}
-              />
+                color={color} />
             ) : (
               <MaterialCommunityIcons
                 name="calendar-blank-outline"
                 size={26}
-                color={color}
-              />
+                color={color} />
             ),
         }}
       />
@@ -69,17 +66,14 @@ export function TabNavigation() {
               <MaterialCommunityIcons
                 name="account-tie"
                 size={26}
-                color={color}
-              />
+                color={color} />
             ) : (
               <MaterialCommunityIcons
                 name="account-outline"
                 size={26}
-                color={color}
-              />
+                color={color} />
             ),
-        }}
-      />
-    </Tab.Navigator>
+          }} />
+      </Tab.Navigator></>
   );
 }
