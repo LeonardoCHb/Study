@@ -1,9 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View } from 'react-native';
-import { Button, Card, Chip, Title } from 'react-native-paper';
+import { StyleSheet, View, ScrollView } from 'react-native';
+import { Button, Card, Chip, List, Title } from 'react-native-paper';
 
-import { useSelector } from 'react-redux';
+import Entypo from "react-native-vector-icons/Entypo";
+
+import { useSelector, useDispatch } from 'react-redux';
+import { subjectsUpdateSubject } from '../../redux/actions/subjects';
 
 import SelectTimeSpan from './TimeDialog';
 import ReduxTest from '../Example'
@@ -53,24 +56,40 @@ const daysIndexes = {
   Saturday: 6
 }
 
+const daysNames = {
+  0:'Sunday',
+  1:'Monday',
+  2:'Tuesday',
+  3:'Wednesday',
+  4:'Thursday',
+  5:'Friday',
+  6:'Saturday'
+}
+
 export function ClassScheduleScreen() {
+  const dispatch = useDispatch()
   const date = new Date
   const subjects = useSelector((state) => state.subjects)
   const [days, setDays] = useState(JSON.parse(JSON.stringify(initialDays)))
   const [day, setDay] = useState(date.getDay());
   const [visible, setVisible] = React.useState(false);
 
+  // console.log(subjects)
+
   const showDialog = () => setVisible(true);
   const hideDialog = () => setVisible(false);
 
+  // console.log(days[day])
+
   useEffect(() => {
     if (subjects) {
-      const newDays = JSON.parse(JSON.stringify(days))
+      const newDays = JSON.parse(JSON.stringify(initialDays))
+      
       subjects.forEach((subject) => {
         subject.grade.forEach((subjectDay) => {
           subjectDay.time.forEach((time) => {
             newDays[daysIndexes[subjectDay.day]]
-            .subjects.push({name: subject.name, hour: time})
+            .subjects.push({id: subject.id, name: subject.name, hour: time})
           })
         })
       })
@@ -78,7 +97,14 @@ export function ClassScheduleScreen() {
     }
   }, [subjects])
 
-  const updateSubject = () => {}
+  const removeHour = (subject, _day) => {
+    const indexSubject = subjects.findIndex((_subject) => _subject.id === subject.id)
+    const updatedSubject = JSON.parse(JSON.stringify(subjects[indexSubject]))
+    const indexGradeDay = updatedSubject.grade.findIndex((gradeDay) => gradeDay.day === daysNames[_day])
+    updatedSubject.grade[indexGradeDay].time = updatedSubject.grade[indexGradeDay].time
+    .filter((hour) => (hour.start !== subject.hour.start) && (hour.end !== subject.hour.end))
+    dispatch(subjectsUpdateSubject(updatedSubject))
+  }
 
   return (
     <View style={styles.container}>
@@ -96,7 +122,15 @@ export function ClassScheduleScreen() {
         <Card.Title title={days[day].day} />
         <Card.Content style={styles.cardContent}>
           <Title>Subjects</Title>
-          {days[day].subjects.map((subject) => {})}
+          <ScrollView style={styles.list}>
+          {days[day].subjects.map((subject, index) => (
+            <List.Item 
+              key={index}
+              title={`${subject.name} - Start: ${subject.hour.start} End: ${subject.hour.end}`} 
+              right={() => <Entypo onPress={() => removeHour(subject, day)} name="trash" size={30}/>}
+              />
+          ))}
+          </ScrollView>
         </Card.Content>
         <Card.Actions>
           <Button style={styles.button} color="black" onPress={showDialog}>Add subject</Button>
@@ -133,5 +167,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 3
+  },
+  list:{
+    height: '100%'
   }
 });

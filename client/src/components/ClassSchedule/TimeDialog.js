@@ -10,31 +10,46 @@ import { subjectsUpdateSubject } from '../../redux/actions/subjects';
 const SelectTimeSpan = ({visible, hideDialog}) => {
   const dispatch = useDispatch()
   const subjects = useSelector((state) => state.subjects)
+
   const [isDateStartPickerVisible, setDateStartPickerVisibility] = useState(false);
   const [isDateEndPickerVisible, setDateEndtPickerVisibility] = useState(false);
 
-  console.log(subjects)
+  const [subject, setSubject] = useState(undefined)
+  const [day, setDay] = useState(undefined)
+  const [hour, setHour] = useState({start: undefined, end: undefined})
 
-  const handleSubject = (subject) => {
-    console.log(subject)
-  }
-  const handleDay = (day) => {
-    console.log(day)
+  const cleanUp = () => {
+    setSubject(undefined)
+    setDay(undefined)
+    setHour({start: undefined, end: undefined})
   }
 
-  const updateSubject = () => {}
+  const handleSubject = (_subject) => {setSubject(_subject)}
+  const handleDay = (_day) => {setDay(_day)}
+ 
+  const updateSubject = () => {
+    if (subject && day && hour.start && hour.end) {
+      const updatedSubject = JSON.parse(JSON.stringify(subject))
+      const dayIndex = updatedSubject.grade.findIndex((weekDay) => weekDay.day === day)
+      if (dayIndex !== -1) updatedSubject.grade[dayIndex].time.push({...hour})
+      else updatedSubject.grade.push({day, time: [{...hour}]})
+      dispatch(subjectsUpdateSubject(updatedSubject))
+    }
+  }
 
   const showStartDatePicker = () => {setDateStartPickerVisibility(true)};
   const hideStartDatePicker = () => {setDateStartPickerVisibility(false)};
   const handleStartConfirm = (date) => {
-    console.log("A start date has been picked: ", date);
+    const _hour = new Date(date)
+    setHour({...hour, start: `${_hour.getHours()}:${_hour.getMinutes()}`})
     hideStartDatePicker();
   };
 
   const showEndDatePicker = () => {setDateEndtPickerVisibility(true)};
   const hideEndDatePicker = () => {setDateEndtPickerVisibility(false)};
   const handleEndConfirm = (date) => {
-    console.log("A end date has been picked: ", date);
+    const _hour = new Date(date)
+    setHour({...hour, end: `${_hour.getHours()}:${_hour.getMinutes()}`})
     hideEndDatePicker();
   };
 
@@ -53,35 +68,38 @@ const SelectTimeSpan = ({visible, hideDialog}) => {
           onConfirm={handleEndConfirm}
           onCancel={hideEndDatePicker}
         />
-        <Dialog visible={visible} onDismiss={hideDialog}>
+        <Dialog visible={visible} onDismiss={() => {hideDialog(); cleanUp()}}>
           <Dialog.Title>Add subject to schedule</Dialog.Title>
           <View style={styles.lists}>
             <ScrollView>
-              {subjects.map((subject) => (
+              {subjects.map((_subject) => (
                 <Button
-                  onPress={() => handleSubject(subject)}  
-                  key={subject.id}
-                  color='black'
-                >{subject.name}
+                  onPress={() => handleSubject(_subject)}  
+                  key={_subject.id}
+                  color={ subject?.id === _subject.id ?'black' : 'white'}
+                >{_subject.name}
                 </Button>
               ))}
             </ScrollView>
             <ScrollView style={styles.list}>
               {['Sunday', 'Monday','Tuesday','Wednesday', 'Thursday','Friday','Saturday']
-                .map((day) => (
-                <Button color='black' key={day} onPress={() => handleDay(day)}>
-                {day}
+                .map((weekDay) => (
+                <Button 
+                  color={day === weekDay ? 'black' : 'white' }
+                  key={weekDay} 
+                  onPress={() => handleDay(weekDay)}
+                  >{weekDay}
                 </Button>
               ))}
             </ScrollView>
           </View>
           <Dialog.Content style={styles.buttons}>
-            <Button color='black' onPress={showStartDatePicker}>Start</Button>
-            <Button color='black' onPress={showEndDatePicker}>End</Button>
+            <Button color='black' onPress={showStartDatePicker}>Start {hour?.start ? hour?.start : ''}</Button>
+            <Button color='black' onPress={showEndDatePicker}>End {hour?.end ? hour?.end : ''}</Button>
           </Dialog.Content>
           <Dialog.Actions >
-            <Button color='black' onPress={() => {}}>Add</Button>
-            <Button color='black' onPress={hideDialog}>Close</Button>
+            <Button color='black' onPress={() => {updateSubject(); cleanUp()}}>Add</Button>
+            <Button color='black' onPress={() => {hideDialog(); cleanUp()}}>Close</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
