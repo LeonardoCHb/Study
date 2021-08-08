@@ -21,5 +21,11 @@ export default StyleSheet.create({
       color: '#FFFFFF',
       fontSize: 20,
       marginBottom: 15,
-    }
+    },
+    fab: {
+      position: 'absolute',
+      margin: 0,
+      right: 0,
+      bottom: 0,
+    },
 });
