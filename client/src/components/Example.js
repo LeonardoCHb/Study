@@ -37,7 +37,7 @@ export default function ReduxTest(){
       limitDate: '15/08/2021',
     }
 
-
+    
     const clearName = () => {
       dispatch(userClearName())
     }
