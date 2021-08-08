@@ -7,14 +7,20 @@ import { ScrollView, Text, View } from "react-native";
 import styles from "./HomeScreen.styles.js";
 import { SearchField } from "../SearchField/SearchField.js";
 import { TaskCard } from "../TaskCard/TaskCard.js";
+import { AddTaskModal } from "../AddTaskModal/AddTaskModal";
 
 import { FAB } from "react-native-paper";
 
 export function HomeScreen() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const [AllSubjects, SetAllSubjects] = useState([]);
   const Tasks = useSelector((state) => state.subjects);
+  const [visible, setVisible] = useState(false);
+  const [AllSubjects, SetAllSubjects] = useState([]);
+
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
 
   useEffect(() => {
     if (Tasks) {
@@ -32,8 +38,9 @@ export function HomeScreen() {
           style={styles.fab}
           small
           icon="plus"
-          onPress={() => console.log(Tasks)}
+          onPress={showDialog}
         />
+        <AddTaskModal visible={visible} hideDialog={hideDialog}/>
         <Text style={styles.HeaderText}>
           Hello <Text style={styles.TextName}>{user.name}</Text>
         </Text>
