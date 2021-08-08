@@ -12,7 +12,6 @@ import { AddTaskModal } from "../AddTaskModal/AddTaskModal";
 import { FAB } from "react-native-paper";
 
 export function HomeScreen() {
-  const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const Tasks = useSelector((state) => state.subjects);
   const [visible, setVisible] = useState(false);
