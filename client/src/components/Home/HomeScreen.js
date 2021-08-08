@@ -13,8 +13,6 @@ import { AddTaskModal } from "../AddTaskModal/AddTaskModal";
 
 import { FAB } from "react-native-paper";
 
-import { SearchField } from "../SearchField/SearchField.js"
-import { FAB } from "react-native-paper";
 
 export function HomeScreen() {
   const dispatch = useDispatch();
@@ -35,18 +33,14 @@ export function HomeScreen() {
 
   return (
     <View style={styles.container}>
+
+      <AddTaskModal visible={visible} hideDialog={hideDialog}/>
       <ScrollView
         stickyHeaderIndices={[0]}
         showsVerticalScrollIndicator={false}
+        style={styles.scroll}
       >
 
-        <FAB
-          style={styles.fab}
-          small
-          icon="plus"
-          onPress={showDialog}
-        />
-        <AddTaskModal visible={visible} hideDialog={hideDialog}/>
         <Text style={styles.HeaderText}>
           Hello <Text style={styles.TextName}>{user.name}</Text>
         </Text>
@@ -55,7 +49,33 @@ export function HomeScreen() {
         {AllSubjects.map((task) => {
          <TaskCard  key={task.tasks.id} />;
         })}
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+
       </ScrollView>
+      <FAB
+          style={styles.fab}
+          small
+          icon="plus"
+          onPress={showDialog}
+      />
     </View>
   );
 }
