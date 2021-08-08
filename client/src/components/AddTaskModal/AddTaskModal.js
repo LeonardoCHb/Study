@@ -2,9 +2,12 @@ import * as React from "react";
 import { View } from "react-native";
 import { Button, Dialog, Portal, TextInput } from "react-native-paper";
 
+import { useDispatch, useSelector } from "react-redux";
 
 export function AddTaskModal({ visible, hideDialog }) {
-const [text, setText] = React.useState('');
+  const [name, setName] = React.useState('');
+  const [task, setTask] = React.useState('');
+
 
   return (
     <View>
@@ -13,21 +16,16 @@ const [text, setText] = React.useState('');
           <Dialog.Title>Create your next activity!</Dialog.Title>
           <Dialog.Content>
             <TextInput
-              placeholder="Activity Name"
+              placeholder="Task Name"
               mode="outlined"
-              value={text}
-              onChangeText={(text) => setText(text)}
-              left={<TextInput.Icon name="new" />}
+              value={name}
+              onChangeText={(text) => setName(text)}
             />
             <TextInput
               mode="outlined"
-              value={text}
-              onChangeText={(text) => setText(text)}
-            />
-            <TextInput
-              mode="outlined"
-              value={text}
-              onChangeText={(text) => setText(text)}
+              placeholder="Task description"
+              value={task}
+              onChangeText={(text) => setTask(text)}
             />
           </Dialog.Content>
           <Dialog.Actions>

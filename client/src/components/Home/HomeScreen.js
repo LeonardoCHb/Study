@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SUBJECTS_ADD_SUBJECT } from "../../redux/actions/subjects";
 
 import { ScrollView, Text, View } from "react-native";
 
@@ -17,7 +16,7 @@ import { FAB } from "react-native-paper";
 export function HomeScreen() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
-  const Tasks = useSelector((state) => state.subjects);
+  const subjects = useSelector((state) => state.subjects);
   const [visible, setVisible] = useState(false);
   const [AllSubjects, SetAllSubjects] = useState([]);
 
@@ -26,55 +25,37 @@ export function HomeScreen() {
   const hideDialog = () => setVisible(false);
 
   useEffect(() => {
-    if (Tasks) {
-      SetAllSubjects(Tasks);
+    if (subjects) {
+      let allTasks = []
+      subjects.forEach((subject) => {
+        allTasks = allTasks.concat(subject.tasks)
+      })
+      console.log(allTasks)
     }
-  }, []);
+  }, [subjects]);
 
   return (
     <View style={styles.container}>
-
-      <AddTaskModal visible={visible} hideDialog={hideDialog}/>
+      <Text style={styles.HeaderText}>
+        Hello <Text style={styles.TextName}>{user?.name ? user?.name : 'user'}</Text>
+      </Text>
+      <Text style={styles.text}>What are we going to learn today?</Text>
       <ScrollView
         stickyHeaderIndices={[0]}
         showsVerticalScrollIndicator={false}
         style={styles.scroll}
       >
-
-        <Text style={styles.HeaderText}>
-          Hello <Text style={styles.TextName}>{user.name}</Text>
-        </Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <SearchField />
-        {AllSubjects.map((task) => {
-         <TaskCard  key={task.tasks.id} />;
-        })}
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-        <Text style={styles.text}>What are we going to learn today?</Text>
-
+      {/*<SearchField />*/}
+      {AllSubjects.map((task) => {
+        <TaskCard  key={task.tasks.id} />;
+      })}
       </ScrollView>
+      <AddTaskModal visible={visible} hideDialog={hideDialog}/>
       <FAB
-          style={styles.fab}
-          small
-          icon="plus"
-          onPress={showDialog}
+        style={styles.fab}
+        small
+        icon="plus"
+        onPress={showDialog}
       />
     </View>
   );

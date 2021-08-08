@@ -4,7 +4,7 @@ export default StyleSheet.create({
     container: {
       backgroundColor: '#C4DBE0',
       paddingHorizontal: 7,
-
+      height: '100%'
     },
     HeaderText: {
       marginTop:30,
@@ -22,14 +22,12 @@ export default StyleSheet.create({
       marginBottom: 15,
     },
     fab: {
-      flex: 1,
-      justifyContent: 'flex-end',
       position: 'absolute',
       right: 10,
       bottom: 10,
-      
     },
     scroll: {
-      height: '100%',
+      backgroundColor: 'gray',
+      borderRadius: 15
     },
 });
