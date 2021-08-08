@@ -5,10 +5,15 @@ import { SUBJECTS_ADD_SUBJECT } from "../../redux/actions/subjects";
 import { ScrollView, Text, View } from "react-native";
 
 import styles from "./HomeScreen.styles.js";
+
 import { SearchField } from "../SearchField/SearchField.js";
+
 import { TaskCard } from "../TaskCard/TaskCard.js";
 import { AddTaskModal } from "../AddTaskModal/AddTaskModal";
 
+import { FAB } from "react-native-paper";
+
+import { SearchField } from "../SearchField/SearchField.js"
 import { FAB } from "react-native-paper";
 
 export function HomeScreen() {
@@ -34,6 +39,7 @@ export function HomeScreen() {
         stickyHeaderIndices={[0]}
         showsVerticalScrollIndicator={false}
       >
+
         <FAB
           style={styles.fab}
           small

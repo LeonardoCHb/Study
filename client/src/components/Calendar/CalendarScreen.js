@@ -1,21 +1,15 @@
 import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import styles  from "./CalendarScreen.style";
 
 export function CalendarScreen() {
   return (
     <View style={styles.container}>
-      <Text>Your Class Calendar</Text>
-      <StatusBar style="auto" />
+        <View style={{backgroundColor: 'blue'}}>
+            <Text>asdf</Text>
+        </View>
+        <StatusBar style="auto" />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#0078FF',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
