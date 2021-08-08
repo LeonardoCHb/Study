@@ -18,7 +18,7 @@ export default function ReduxTest(){
       grade:[
         {
           day: 'Monday',
-          time: [0, 1, 2]
+          time: []
         }
       ],
       tasks: [
@@ -37,7 +37,7 @@ export default function ReduxTest(){
       limitDate: '15/08/2021',
     }
 
-
+    
     const clearName = () => {
       dispatch(userClearName())
     }
