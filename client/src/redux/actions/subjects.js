@@ -1,7 +1,8 @@
 import { 
   SUBJECTS_ADD_SUBJECT, 
   SUBJECTS_REMOVE_SUBJECT,
-  SUBJECTS_UPDATE_SUBJECT
+  SUBJECTS_UPDATE_SUBJECT,
+  SUBJECTS_UPDATE_FAVORITE
 } from "../constants/actionTypes";
 
 const subjectsAddSubject = (subject) => async (dispatch) => {
@@ -28,8 +29,17 @@ const subjectsUpdateSubject = (subject) => async (dispatch) => {
   }
 }
 
+const subjectsUpdateFavorite = (subject) => async (dispatch) => {
+  try {
+    dispatch({type: SUBJECTS_UPDATE_FAVORITE, payload: subject})
+  } catch(error) {
+    console.log(error)
+  }
+}
+
 export {
   subjectsAddSubject, 
   subjectsRemoveSubject,
-  subjectsUpdateSubject
+  subjectsUpdateSubject,
+  subjectsUpdateFavorite
 }

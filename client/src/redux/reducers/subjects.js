@@ -1,7 +1,8 @@
 import { 
 SUBJECTS_ADD_SUBJECT,
 SUBJECTS_REMOVE_SUBJECT,
-SUBJECTS_UPDATE_SUBJECT
+SUBJECTS_UPDATE_SUBJECT,
+SUBJECTS_UPDATE_FAVORITE
 } from "../constants/actionTypes";
 
 const initialSubjects = []
@@ -18,6 +19,12 @@ const subjects = (state = initialSubjects, action) => {
       const subjectsList = state
       const pos = subjectsList.findIndex((subject) => subject.id === action.payload.id)
       if (pos !== -1) subjectsList[pos] = action.payload
+      return [...subjectsList]
+    }
+    case SUBJECTS_UPDATE_FAVORITE: {
+      const subjectsList = state
+      const pos = subjectsList.findIndex((subject) => subject.id === action.payload.id)
+      if (pos !== -1) subjectsList[pos].favorite = action.payload
       return [...subjectsList]
     }
     default:

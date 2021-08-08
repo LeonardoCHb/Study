@@ -27,7 +27,8 @@ export default combineReducers({user, subjects})
           task: string,
           limitDate: date,
         }
-      ]
+      ],
+      favorite: boolean
     }
   ]
 }

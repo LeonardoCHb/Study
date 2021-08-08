@@ -3,7 +3,7 @@ import { Text } from "react-native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import { HomeScreen } from "../components/Home/HomeScreen";
 import { ClassScheduleScreen } from "../components/ClassSchedule/ClassScreduleScreen";
-import { CalendarScreen } from "../components/Calendar/CalendarScreen";
+import { AccountSettingsScreen } from "../components/AccountSettings/AccountSettingsScreen";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { useIsFocused } from "@react-navigation/native";
@@ -46,27 +46,6 @@ export function TabNavigation() {
           tabBarIcon: ({ focused, color }) =>
             focused ? (
               <MaterialCommunityIcons
-                name="book-open-page-variant"
-                size={26}
-                color={color}
-              />
-            ) : (
-              <MaterialCommunityIcons
-                name="book-open-variant"
-                size={26}
-                color={color}
-              />
-            ),
-        }}
-      />
-      <Tab.Screen
-        name="Calendar"
-        component={CalendarScreen}
-        options={{
-          tabBarLabel: "Calendar",
-          tabBarIcon: ({ focused, color }) =>
-            focused ? (
-              <MaterialCommunityIcons
                 name="calendar-heart"
                 size={26}
                 color={color}
@@ -74,6 +53,27 @@ export function TabNavigation() {
             ) : (
               <MaterialCommunityIcons
                 name="calendar-blank-outline"
+                size={26}
+                color={color}
+              />
+            ),
+        }}
+      />
+      <Tab.Screen
+        name="Account"
+        component={AccountSettingsScreen}
+        options={{
+          tabBarLabel: "Account",
+          tabBarIcon: ({ focused, color }) =>
+            focused ? (
+              <MaterialCommunityIcons
+                name="account-tie"
+                size={26}
+                color={color}
+              />
+            ) : (
+              <MaterialCommunityIcons
+                name="account-outline"
                 size={26}
                 color={color}
               />
