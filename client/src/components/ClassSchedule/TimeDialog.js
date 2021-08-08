@@ -71,7 +71,7 @@ const SelectTimeSpan = ({visible, hideDialog}) => {
         <Dialog visible={visible} onDismiss={() => {hideDialog(); cleanUp()}}>
           <Dialog.Title>Add subject to schedule</Dialog.Title>
           <View style={styles.lists}>
-            <ScrollView>
+            <ScrollView style={styles.list}>
               {subjects.map((_subject) => (
                 <Button
                   onPress={() => handleSubject(_subject)}  
@@ -97,9 +97,9 @@ const SelectTimeSpan = ({visible, hideDialog}) => {
             <Button color='black' onPress={showStartDatePicker}>Start {hour?.start ? hour?.start : ''}</Button>
             <Button color='black' onPress={showEndDatePicker}>End {hour?.end ? hour?.end : ''}</Button>
           </Dialog.Content>
-          <Dialog.Actions >
-            <Button color='black' onPress={() => {updateSubject(); cleanUp()}}>Add</Button>
-            <Button color='black' onPress={() => {hideDialog(); cleanUp()}}>Close</Button>
+          <Dialog.Actions style={styles.actionsButtons}>
+            <Button color='black' style={styles.button} onPress={() => {updateSubject(); cleanUp()}}>Add</Button>
+            <Button color='black' style={styles.button} onPress={() => {hideDialog(); cleanUp()}}>Close</Button>
           </Dialog.Actions>
         </Dialog>
       </Portal>
@@ -115,15 +115,23 @@ const styles = StyleSheet.create({
     height: 300
   },
   list: {
+    width: '50%',
     height: '100%',
     maxHeight: '100%',
-    overflow: 'scroll'
   },
   buttons:{
     display:'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     padding: 2
+  },
+  actionsButtons: {
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
+  },
+  button: {
+    width: '50%'
   }
 });
 
