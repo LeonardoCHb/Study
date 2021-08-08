@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#0078FF',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: 40
   },
   card: {
     flex: 1,
