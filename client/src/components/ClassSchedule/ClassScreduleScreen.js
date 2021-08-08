@@ -8,63 +8,20 @@ import Entypo from "react-native-vector-icons/Entypo";
 import { useSelector, useDispatch } from 'react-redux';
 import { subjectsUpdateSubject } from '../../redux/actions/subjects';
 
+import CreateSubject from './CreateSubjectDialog';
 import SelectTimeSpan from './TimeDialog';
-import ReduxTest from '../Example'
-
-function mod(n, m) {
-  return ((n % m) + m) % m;
-}
 
 const initialDays = [
-  {
-    day: 'Sunday',
-    subjects: []
-  },
-  {
-    day: 'Monday',
-    subjects: []
-  },
-  {
-    day: 'Tuesday',
-    subjects: []
-  },
-  {
-    day: 'Wednesday',
-    subjects: []
-  },
-  {
-    day: 'Thursday',
-    subjects: []
-  },
-  {
-    day: 'Friday',
-    subjects: []
-  },
-  {
-    day: 'Saturday',
-    subjects: []
-  },
+  {day: 'Sunday',subjects: []},
+  {day: 'Monday',subjects: []},
+  {day: 'Tuesday',subjects: []},
+  {day: 'Wednesday',subjects: []},
+  {day: 'Thursday',subjects: []},
+  {day: 'Friday',subjects: []},
+  {day: 'Saturday',subjects: []},
 ]
-
-const daysIndexes = {
-  Sunday: 0,
-  Monday: 1,
-  Tuesday: 2,
-  Wednesday: 3,
-  Thursday: 4,
-  Friday: 5,
-  Saturday: 6
-}
-
-const daysNames = {
-  0:'Sunday',
-  1:'Monday',
-  2:'Tuesday',
-  3:'Wednesday',
-  4:'Thursday',
-  5:'Friday',
-  6:'Saturday'
-}
+const daysIndexes = {Sunday: 0,Monday: 1,Tuesday: 2,Wednesday: 3,Thursday: 4,Friday: 5,Saturday: 6}
+const daysNames = {0:'Sunday',1:'Monday',2:'Tuesday',3:'Wednesday',4:'Thursday',5:'Friday',6:'Saturday'}
 
 export function ClassScheduleScreen() {
   const dispatch = useDispatch()
@@ -73,11 +30,13 @@ export function ClassScheduleScreen() {
   const [days, setDays] = useState(JSON.parse(JSON.stringify(initialDays)))
   const [day, setDay] = useState(date.getDay());
   const [visible, setVisible] = React.useState(false);
+  const [visibleCreate, setVisibleCreate] = React.useState(false)
 
-  // console.log(subjects)
+  const showTimeDialog = () => setVisible(true);
+  const hideTimeDialog = () => setVisible(false);
 
-  const showDialog = () => setVisible(true);
-  const hideDialog = () => setVisible(false);
+  const showCreateSubjectDialog = () => setVisibleCreate(true);
+  const hideCreateSubjectDialog = () => setVisibleCreate(false);
 
   // console.log(days[day])
 
@@ -91,6 +50,13 @@ export function ClassScheduleScreen() {
             newDays[daysIndexes[subjectDay.day]]
             .subjects.push({id: subject.id, name: subject.name, hour: time})
           })
+        })
+      })
+      newDays.forEach((_day) => {
+        _day.subjects.sort((subject1,subject2) => {
+          const timeOne = (parseInt(subject1.hour.start.split(':')[0])*60)+parseInt(subject1.hour.start.split(':')[1])
+          const timeTwo = (parseInt(subject2.hour.start.split(':')[0])*60)+parseInt(subject2.hour.start.split(':')[1])
+          return timeOne > timeTwo
         })
       })
       setDays(newDays)
@@ -108,7 +74,8 @@ export function ClassScheduleScreen() {
 
   return (
     <View style={styles.container}>
-      <SelectTimeSpan visible={visible} hideDialog={hideDialog}/>
+      <SelectTimeSpan visible={visible} hideDialog={hideTimeDialog}/>
+      <CreateSubject visible={visibleCreate} hideDialog={hideCreateSubjectDialog}/>
       <Card style={styles.card}>
         <View style={styles.chips}>
           <Chip style={styles.chip} onPress={() => setDay(0)}>Sun</Chip>
@@ -132,8 +99,9 @@ export function ClassScheduleScreen() {
           ))}
           </ScrollView>
         </Card.Content>
-        <Card.Actions>
-          <Button style={styles.button} color="black" onPress={showDialog}>Add subject</Button>
+        <Card.Actions style={styles.buttons}>
+          <Button color="black" onPress={showCreateSubjectDialog}>Subjects manager</Button>
+          <Button color="black" onPress={showTimeDialog}>Add to schedule</Button>
         </Card.Actions>
       </Card>
       <StatusBar style="auto" />
@@ -155,10 +123,13 @@ const styles = StyleSheet.create({
   },
   cardContent: {
     flex: 1 
-  }, 
-  button: {
-    width: '100%',
   },
+  buttons: {
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  button: {},
   chip:{
     margin: 1,
     height: 30
