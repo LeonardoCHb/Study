@@ -2,7 +2,6 @@ import { StyleSheet } from 'react-native'
 
 export default StyleSheet.create({
     container: {
-      flex: 1,
       backgroundColor: '#C4DBE0',
       paddingHorizontal: 7,
 
@@ -23,9 +22,14 @@ export default StyleSheet.create({
       marginBottom: 15,
     },
     fab: {
+      flex: 1,
+      justifyContent: 'flex-end',
       position: 'absolute',
-      margin: 16,
-      right: 0,
-      bottom: 0,
+      right: 10,
+      bottom: 10,
+      
+    },
+    scroll: {
+      height: '100%',
     },
 });

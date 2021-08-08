@@ -1,36 +1,81 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SUBJECTS_ADD_SUBJECT } from "../../redux/actions/subjects";
 
 import { ScrollView, Text, View } from "react-native";
 
 import styles from "./HomeScreen.styles.js";
-import { TaskCard } from "../TaskCard/TaskCard.js";
 
-import { SearchField } from "../SearchField/SearchField.js"
+import { SearchField } from "../SearchField/SearchField.js";
+
+import { TaskCard } from "../TaskCard/TaskCard.js";
+import { AddTaskModal } from "../AddTaskModal/AddTaskModal";
+
 import { FAB } from "react-native-paper";
 
+
 export function HomeScreen() {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const Tasks = useSelector((state) => state.subjects);
+  const [visible, setVisible] = useState(false);
+  const [AllSubjects, SetAllSubjects] = useState([]);
+
+
+  const showDialog = () => setVisible(true);
+  const hideDialog = () => setVisible(false);
+
+  useEffect(() => {
+    if (Tasks) {
+      SetAllSubjects(Tasks);
+    }
+  }, []);
+
   return (
     <View style={styles.container}>
-      <ScrollView>
+
+      <AddTaskModal visible={visible} hideDialog={hideDialog}/>
+      <ScrollView
+        stickyHeaderIndices={[0]}
+        showsVerticalScrollIndicator={false}
+        style={styles.scroll}
+      >
+
         <Text style={styles.HeaderText}>
-          Hello <Text style={styles.TextName}>Leopardo</Text>
+          Hello <Text style={styles.TextName}>{user.name}</Text>
         </Text>
         <Text style={styles.text}>What are we going to learn today?</Text>
         <SearchField />
-        <FAB
+        {AllSubjects.map((task) => {
+         <TaskCard  key={task.tasks.id} />;
+        })}
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+        <Text style={styles.text}>What are we going to learn today?</Text>
+
+      </ScrollView>
+      <FAB
           style={styles.fab}
           small
           icon="plus"
-          onPress={() => console.log("Pressed")}
-        />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-        <TaskCard />
-      </ScrollView>
+          onPress={showDialog}
+      />
     </View>
   );
 }
